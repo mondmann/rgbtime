@@ -41,11 +41,11 @@ class RGBpanel(object):
     def update_time(self):
         self.setup()
 
-        self.sock.sendall(b'n5G\xd0')
+        self.sock.sendall(b'Mn5G\xd0')
 
         now = datetime.datetime.now()
         # 1, 0 could be TZ?
-        time_data = struct.pack("8B", now.hour, now.min, now.second, now.year, now.month, now.day, 1, 0)
+        time_data = struct.pack("8B", now.hour, now.minute, now.second, now.year - 2000, now.month, now.day, 1, 0)
         self.communicate(time_data, b'\xaa\xaa')
 
     def setup(self):
